@@ -1,1 +1,282 @@
-# GS
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Frases Mágicas</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      color: #e30b5c;
+    }
+
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, #ff9a9e, #fad0c4, #ffdde1, #ffc3a0, #ff9a9e);
+      background-size: 400% 400%;
+      animation: gradientMove 20s ease infinite;
+      z-index: -1;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 0.3em;
+      color: #b392ac;
+      text-shadow: 2px 2px 4px #ff9a9e;
+    }
+
+    h2 {
+      font-size: 1.5em;
+      margin-bottom: 1em;
+      color: #c71585;
+    }
+
+    .buttons {
+      margin-bottom: 2em;
+    }
+
+    button {
+      font-size: 1.2em;
+      margin: 0 10px;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      background: #fff0f5;
+      color: #d6336c;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    button:hover {
+      background: #ffb6c1;
+      transform: scale(1.05);
+    }
+
+    .frase {
+      font-size: 1.6em;
+      font-style: italic;
+      padding: 20px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.3);
+      box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.3);
+      max-width: 500px;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="background"></div>
+
+  <div class="container">
+    <h1>✨ Frases para Ti ✨</h1>
+    <h2>¡Toca un botón y deja que la magia hable!</h2>
+    <div class="buttons">
+      <button onclick="mostrarFrase('cumplido')">Cumplido</button>
+      <button onclick="mostrarFrase('divertido')">Divertido</button>
+      <button onclick="mostrarFrase('aleatorio')">Aleatorio</button>
+    </div>
+    <div class="frase" id="frase">Aquí aparecerá una frase mágica...</div>
+  </div>
+
+  <script>
+    const todasLasFrases = {
+      cumplido: [
+       "Tu sonrisa tiene el poder de calmar cualquier tormenta.",
+      "Eres como una canción bonita que nunca se olvida.",
+      "Tu forma de ser hace que todo sea más bonito.",
+      "No sabía que los rayos de sol podían caminar... hasta que te vi.",
+      "Hay personas lindas, pero tú las haces quedar como aficionadas.",
+      "Tu risa es el sonido favorito de mi día.",
+      "Eres como un atardecer: imposible de ignorar y fácil de admirar.",
+      "Tu presencia es como un abrazo al alma.",
+      "Contigo todo es un poquito más mágico.",
+      "Tienes un corazón que se nota a kilómetros de distancia.",
+      "Cada palabra tuya ilumina como si fueran estrellas.",
+      "Eres más bonita que todos los amaneceres juntos.",
+      "Si fueras poema, serías el que más se relee.",
+      "Tienes esa luz que no se compra, ni se finge.",
+      "Podría vivir solo de tus sonrisas.",
+      "Tus ojos son mi lugar favorito para perderme.",
+      "Eres una razón constante para sonreír.",
+      "Tienes la dulzura de mil chocolates sin empalagar.",
+      "Tienes el tipo de belleza que no necesita filtros.",
+      "Me encantas sin siquiera intentarlo.",
+      "Hay algo en ti que hace que todo valga la pena.",
+      "Eres como ese momento perfecto que se quiere repetir.",
+      "Tu esencia es mi inspiración favorita.",
+        
+      "Me gusta cómo haces del mundo un lugar mejor solo estando.",
+      "Tienes una forma de ser que enamora sin planearlo.",
+      "Si fueras canción, serías la más escuchada del mundo.",
+      "Tu ternura se nota incluso cuando estás seria.",
+      "Eres un poema en la piel y una historia en el alma.",
+      "Quiero verte feliz porque tu felicidad mejora la mía.",
+      "Tu bondad brilla incluso cuando no dices nada.",
+      "Nunca conocí a alguien que haga latir tan bonito mi corazón.",
+      "Tú eres ese detalle que me hace suspirar.",
+      "Estar cerca de ti es como estar en casa.",
+      "Tu risa tiene poderes mágicos, lo juro.",
+      "Tienes un alma tan bonita que da gusto conocerte.",
+      "Si fueras aroma, serías el que me hace cerrar los ojos.",
+      "No hay filtro que iguale tu belleza natural.",
+      "Eres tan especial que hasta el cielo se pone celoso.",
+      "Tus palabras calman como abrazo cálido.",
+      "Eres ese milagro que no sabía que necesitaba.",
+      "Lo tuyo no es belleza, es arte.",
+      "Contigo todo tiene más sentido.",
+      "Tu forma de mirar dice más que mil palabras.",
+      "Nunca dejes de ser tú, porque así estás perfecta.",
+      "Eres el tipo de persona que dan ganas de cuidar.",
+      "Tu alegría es contagiosa y hermosa.",
+      "Hay estrellas que envidian tu luz.",
+      "Eres mi pensamiento feliz del día.",
+      "Tu dulzura es un refugio.",
+      "Estás hecha de todo lo bueno que tiene la vida."
+      ],
+      divertido: [
+          "¿Eres recarga de celular? Porque me devuelves la vida.",
+      "¿Eres señal de WiFi? Porque cuando te vas me siento desconectado.",
+      "Si fueras aplicación, estarías siempre en mi pantalla principal.",
+      "¿Tienes mapa? Porque me perdí en tu risa.",
+      "Eres como una notificación feliz: inesperada pero emocionante.",
+      "¿Eres pastel? Porque contigo todo es más dulce.",
+      "Mi crush eres tú, pero no le digas a nadie... bueno, solo a ti.",
+      "Contigo me siento como el emoji de corazón en llamas.",
+      "Eres como el chocolate: imposible resistirse.",
+      "¿Eres update de software? Porque contigo todo mejora.",
+      "Quisiera ser meme para sacarte una sonrisa todo el día.",
+      "Eres el único error de sistema que aceptaría feliz.",
+      "¿Eres Spotify? Porque siempre tienes algo que me gusta.",
+      "Contigo hasta el lunes se siente como viernes.",
+      "No soy gato, pero me encantaría tener siete vidas contigo.",
+      "¿Estás hecha de pixeles? Porque luces perfecta hasta en baja resolución.",
+      "Si fueras glitch, te repetiría una y otra vez.",
+      "Contigo hasta las matemáticas tienen sentido... más o menos.",
+      "Eres más dulce que 5 tazas de café con azúcar.",
+      "Quisiera ser sueño para verte todas las noches.",
+      "Contigo hasta el insomnio se vuelve agradable.",
+      "Me gustas más que dormir hasta tarde.",
+      "Si fueras canción, te pondría en loop.",
+      "¿Eres notificación de mensaje? Porque haces latir mi corazón.",
+      "Contigo hasta mis memes se sienten más graciosos.",
+      "No soy Google, pero tengo todo lo que buscas.",
+      "Tú haces que los lunes no duelan tanto.",
+      "Eres el tipo de caos que me gusta tener.",
+      "¿Eres almohada? Porque contigo me siento cómodo.",
+      "Quiero ser tu playlist favorita.",
+      "Contigo no necesito vacaciones.",
+      "Eres más brillante que el modo nocturno en mi vida.",
+      "¿Eres notita adhesiva? Porque no dejo de pensar en ti.",
+      "Te miro como los perritos miran a su humano favorito.",
+      "Tu voz debería ser ringtone.",
+      "¿Eres Google Maps? Porque sin ti me pierdo.",
+      "Eres mejor que una siesta en domingo.",
+      "Eres tan especial como encontrar pizza en el refri.",
+      "No soy chef, pero contigo preparo un buen rato.",
+      "Tu risa es mi notificación favorita.",
+      "Si fueras mensaje de texto, no dejaría de leerlo.",
+      "Eres la playlist que alegra mi día.",
+      "Contigo todo es más ligero, hasta el drama.",
+      "¿Eres Google? Porque encontré todo lo que buscaba.",
+      "Si fueras serie, te vería sin pausas.",
+      "Eres como el WiFi de mi abuelita: escasa, pero valiosa.",
+      "Si fueras sticker, serías el más usado.",
+      "Eres el algoritmo que mejora mi día.",
+      "Mi humor se actualiza cuando hablo contigo."
+      ],
+      aleatorio: [
+              "Hoy pensé en ti. Solo eso, pero fue suficiente.",
+      "El mundo tiene suerte de que existas.",
+      "Me gusta que estés en mi universo, aunque sea un rincón.",
+      "Tu existencia le da pausa a mis días.",
+      "Eres uno de esos pensamientos que se cuelan cuando menos lo espero.",
+      "Me encantaría saber cómo fue tu día.",
+      "A veces un mensaje tuyo cambia todo mi humor.",
+      "No tienes idea del efecto bonito que causas.",
+      "Podrías aparecer en mi vida cien veces y nunca me cansaría.",
+      "Tienes algo que no sé explicar, pero me encanta.",
+      "No eres notificación, pero espero por ti igual.",
+      "Estás en ese rincón tierno de mis pensamientos.",
+      "Ojalá sonrías mucho hoy, porque lo mereces.",
+      "Tienes magia en lo que haces sin darte cuenta.",
+      "Si fueras lugar, sería donde quiero quedarme.",
+      "A veces sin hablar dices más que mil palabras.",
+      "Solo quería que supieras que pienso en ti.",
+      "Tu forma de estar presente se siente bonita.",
+      "Hoy me encontré con tu recuerdo... y sonreí.",
+      "Estás donde no te veo, pero sí te siento.",
+      "Ojalá sepas lo especial que eres.",
+      "Hay personas y luego estás tú: distinta y luminosa.",
+      "No me hables de suerte si no es por conocerte.",
+      "A veces, lo mejor de mi día es pensar en ti.",
+      "Hay coincidencias que parecen milagros. Como tú.",
+      "Tu risa vive en mis recuerdos favoritos.",
+      "Apareciste como quien no quiere nada y te quedaste como todo.",
+      "Hay momentos que mejoran solo con recordarte.",
+      "Tienes ese algo que me calma el alma.",
+      "Tú y el café: lo mejor del día.",
+      "Mi día está completo si tú estás en él.",
+      "A veces sonrío sin razón... y es por ti.",
+      "Eres ese mensaje que espero y no sabía.",
+      "Tu dulzura no cabe en palabras.",
+      "Hay memorias que saben a ti.",
+      "Tu voz sería mi canción favorita.",
+      "Eres el pensamiento que no borro.",
+      "Contigo todo se vuelve más suave.",
+      "Hay abrazos que se dan con palabras, y tú sabes darlos.",
+      "Eres ese instante bonito que quiero repetir.",
+      "Tu mirada tiene efecto calmante.",
+      "A veces, lo más sencillo es lo que más se siente. Como tú.",
+      "No necesito razones para pensarte. Sucede.",
+      "Estás hecha de pequeñas cosas que enamoran.",
+      "Hay silencios que comparto contigo sin decir nada.",
+      "Tu presencia se nota incluso en la distancia.",
+      "Me haces bien, y eso ya es mucho.",
+      "Tu forma de ser me da paz.",
+      "Aunque no lo sepas, haces mi día mejor."
+      ]
+    };
+
+    const frasesRestantes = {
+      cumplido: [...todasLasFrases.cumplido],
+      divertido: [...todasLasFrases.divertido],
+      aleatorio: [...todasLasFrases.aleatorio]
+    };
+
+    function mostrarFrase(categoria) {
+      if (frasesRestantes[categoria].length === 0) {
+        frasesRestantes[categoria] = [...todasLasFrases[categoria]];
+      }
+
+      const indice = Math.floor(Math.random() * frasesRestantes[categoria].length);
+      const frase = frasesRestantes[categoria].splice(indice, 1)[0];
+
+      document.getElementById("frase").textContent = frase;
+    }
+  </script>
+</body>
+</html>
